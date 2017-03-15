@@ -53,12 +53,13 @@ class TodoContainer extends React.Component{
                             isUpdating:true,
                             originalitems: mytodo.length,
                         })
-                        if(this.props.routeParams.mode ==="all"){
+                        var mode = this.props.routeParams.mode;
+                        if(mode ==="all"){
                             this.setState({
                             items:[...lastItemState,...mytodo],
                         })
                         }
-                        if(this.props.routeParams.mode ==="open"){
+                        else if(mode ==="open"){
                             TodoApi.onGetOpen(this.state.user)
                             .then(mytodo=>{
                                 this.setState({items: [...mytodo]}
@@ -67,13 +68,19 @@ class TodoContainer extends React.Component{
                                 console.log(err)
                             });
                         }
-                        if(this.props.routeParams.mode ==="completed"){
+                        else if(mode ==="completed"){
                             TodoApi.onGetCompleted(this.state.user)
                             .then(mytodo=>{
                                 this.setState({items: [...mytodo]});
                             }).catch(err=>{
                                 console.log(err)
                             });
+                        }
+                        else{
+                            this.context.router.push('/todo/all');
+                            this.setState({
+                            items:[...lastItemState,...mytodo],
+                            })
                         }
                         TodoApi.onGetCompleted(res.data.response._id)
                         .then((mytodo)=>{

@@ -46749,6 +46749,7 @@ var routes = _react2.default.createElement(
         _reactRouter.Route,
         { path: '/', component: _App2.default },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _UserContainer2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'todo', component: _TodoContainer2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: ':mode', component: _UserContainer2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: 'todo/:mode', component: _TodoContainer2.default })
     )
@@ -47568,23 +47569,27 @@ var TodoContainer = function (_React$Component) {
                                 isUpdating: true,
                                 originalitems: mytodo.length
                             });
-                            if (_this2.props.routeParams.mode === "all") {
+                            var mode = _this2.props.routeParams.mode;
+                            if (mode === "all") {
                                 _this2.setState({
                                     items: [].concat(_toConsumableArray(lastItemState), _toConsumableArray(mytodo))
                                 });
-                            }
-                            if (_this2.props.routeParams.mode === "open") {
+                            } else if (mode === "open") {
                                 _TodoApi2.default.onGetOpen(_this2.state.user).then(function (mytodo) {
                                     _this2.setState({ items: [].concat(_toConsumableArray(mytodo)) });
                                 }).catch(function (err) {
                                     console.log(err);
                                 });
-                            }
-                            if (_this2.props.routeParams.mode === "completed") {
+                            } else if (mode === "completed") {
                                 _TodoApi2.default.onGetCompleted(_this2.state.user).then(function (mytodo) {
                                     _this2.setState({ items: [].concat(_toConsumableArray(mytodo)) });
                                 }).catch(function (err) {
                                     console.log(err);
+                                });
+                            } else {
+                                _this2.context.router.push('/todo/all');
+                                _this2.setState({
+                                    items: [].concat(_toConsumableArray(lastItemState), _toConsumableArray(mytodo))
                                 });
                             }
                             _TodoApi2.default.onGetCompleted(res.data.response._id).then(function (mytodo) {
