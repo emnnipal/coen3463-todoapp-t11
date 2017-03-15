@@ -58,9 +58,9 @@ class Todo extends React.Component{
                 <p>{this.props.name} | {this.props.email}</p>
                 <div className="App-section">
                 <Menu pointing secondary>
-                  <Menu.Item name='all' active={this.props.activeItem === 'all'} onClick={this.props.todoAll} />
-                  <Menu.Item style={{color: 'blue'}} name='open' active={this.props.activeItem === 'open'} onClick={this.props.todoOpen} />
-                  <Menu.Item style={{color: 'red'}}  name='completed' active={this.props.activeItem === 'completed'} onClick={this.props.todoCompleted} />
+                  <Menu.Item name='all' active={this.props.mode === 'all'} onClick={this.props.todoAll} />
+                  <Menu.Item style={{color: 'blue'}} name='open' active={this.props.mode === 'open'} onClick={this.props.todoOpen} />
+                  <Menu.Item style={{color: 'red'}}  name='completed' active={this.props.mode === 'completed'} onClick={this.props.todoCompleted} />
                   <Menu.Menu position='right'>
                     <Menu.Item name='Clear All Completed' onClick={this.props.DelAllComplete} />
                     <Menu.Item name='logout' onClick={this.props.onLogOut} />

@@ -30,7 +30,7 @@ class Login extends Component {
                 user: res.data.response._id,
                 username: data.response.username,
               });
-              this.context.router.push('/todo');
+              this.context.router.push('/todo/all');
               // window.location = '/todo';
               console.log(data);
               return;
@@ -57,7 +57,7 @@ class Login extends Component {
       </Message>:<p/>}
       
         <Form.Field>
-          <label align="left">Username</label>
+          <label>Username</label>
           <Input>
           <input type="text" placeholder="" size="tiny" ref="username"/></Input>
         </Form.Field>

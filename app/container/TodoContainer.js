@@ -45,24 +45,46 @@ class TodoContainer extends React.Component{
                         user: res.data.response._id,
                         email: res.data.response.email,
                         username: res.data.response.username,
-                        isLoading: false,
                     });
                     TodoApi.onGetTodo(res.data.response._id)
                     .then((mytodo)=>{
                         this.setState({
-                            items:[...lastItemState,...mytodo],
-                            
+                            isLoading: false,
+                            isUpdating:true,
                             originalitems: mytodo.length,
                         })
-                    });
-                    TodoApi.onGetCompleted(res.data.response._id)
-                    .then((mytodo)=>{
-                        this.setState({
-                            completedCount: mytodo.length,
-                            isCounting: false,
-                            isUpdating: false,
+                        if(this.props.routeParams.mode ==="all"){
+                            this.setState({
+                            items:[...lastItemState,...mytodo],
                         })
+                        }
+                        if(this.props.routeParams.mode ==="open"){
+                            TodoApi.onGetOpen(this.state.user)
+                            .then(mytodo=>{
+                                this.setState({items: [...mytodo]}
+                                            );
+                            }).catch(err=>{
+                                console.log(err)
+                            });
+                        }
+                        if(this.props.routeParams.mode ==="completed"){
+                            TodoApi.onGetCompleted(this.state.user)
+                            .then(mytodo=>{
+                                this.setState({items: [...mytodo]});
+                            }).catch(err=>{
+                                console.log(err)
+                            });
+                        }
+                        TodoApi.onGetCompleted(res.data.response._id)
+                        .then((mytodo)=>{
+                            this.setState({
+                                completedCount: mytodo.length,
+                                isCounting: false,
+                                isUpdating: false,
+                            })
+                        });
                     });
+                    
                 }else{
                     this.context.router.push('/');
                 
@@ -119,7 +141,6 @@ class TodoContainer extends React.Component{
             });;
     }
     OnDelete(todo,index){
-        console.log(todo);
         this.setState({isUpdating: true});
         let lastItemState = this.state.items;
         TodoApi.onDelete(todo._id).then(res=>{
@@ -129,6 +150,8 @@ class TodoContainer extends React.Component{
                 this.setState({
                     items: [...lastItemState],
                     isUpdating: false,
+                    originalitems: this.state.originalitems - 1,
+                    completedCount:this.state.completedCount -1,
                 });
                 }else{
                 this.setState({
@@ -157,6 +180,7 @@ class TodoContainer extends React.Component{
                         items: [...mytodo],
                         originalitems: this.state.originalitems - this.state.completedCount,
                         completedCount: 0,});
+            this.context.router.push('/todo/all');
             });
         })
         .catch(err=>{

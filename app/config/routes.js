@@ -8,7 +8,6 @@ var routes = (
     <Router history={browserHistory} >
         <Route path='/' component={App}>
             <IndexRoute component={UserContainer} />
-            <Route path ='todo' component={TodoContainer}/>
             <Route path =':mode' component={UserContainer}/>
             <Route path ='todo/:mode' component={TodoContainer}/>
         </Route>
