@@ -57,7 +57,7 @@ class Login extends Component {
       </Message>:<p/>}
       
         <Form.Field>
-          <label>Username</label>
+          <label align="left">Username</label>
           <Input>
           <input type="text" placeholder="" size="tiny" ref="username"/></Input>
         </Form.Field>

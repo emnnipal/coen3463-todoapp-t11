@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css';
+import { Container, Grid,Segment } from 'semantic-ui-react';
 
 class App extends React.Component{
     constructor(props) {
@@ -8,9 +9,9 @@ class App extends React.Component{
     }
     render(){
         return(
-            <div className="App-section">
-                {this.props.children}
-            </div>
+            <Container fluid>
+                  {this.props.children}       
+            </Container>
         );
     }
 }
@@ -20,7 +21,3 @@ App.contextTypes = {
 };
 
 export default App;
-
-//header
-    //body
-//footeer

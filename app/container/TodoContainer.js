@@ -30,6 +30,7 @@ class TodoContainer extends React.Component{
         this.OnDelete = this.OnDelete.bind(this);
         this.handleitems = this.handleitems.bind(this);
         this.DelAllComplete = this.DelAllComplete.bind(this);
+        this.handleSplice = this.handleSplice.bind(this);
     }
 
     componentDidMount(){
@@ -83,6 +84,10 @@ class TodoContainer extends React.Component{
 
     handleSetStateItem(value){
         this.setState({items:value});
+    }
+
+    handleSplice(){
+        this.state.items.splice(this.state.completedCount,1)
     }
 
     handleitems(){
@@ -149,7 +154,9 @@ class TodoContainer extends React.Component{
             .then(mytodo=>{
             console.log(mytodo)
             this.setState({isUpdating:false,
-                        items: [...mytodo]});
+                        items: [...mytodo],
+                        originalitems: this.state.originalitems - this.state.completedCount,
+                        completedCount: 0,});
             });
         })
         .catch(err=>{
@@ -221,6 +228,8 @@ class TodoContainer extends React.Component{
                 setOriginalItems={this.handleitems}
                 DelAllComplete={this.DelAllComplete}
                 activeItem={this.state.activeItem}
+                mode={this.props.routeParams.mode}
+                handleSplice={this.handleSplice}
             />
             </div>
         )

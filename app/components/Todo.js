@@ -18,30 +18,28 @@ class Todo extends React.Component{
     onAddTodo(e) {
         this.setState({isAdding:true});
         e.preventDefault();
-        var lastState = this.props.items; //get last state of item
-        let toDo = { //create a todo object to be saved
+        var lastState = this.props.items; 
+        let toDo = { 
             name: this.refs.todo.value,
             user: this.props.user,
             createDate: moment().tz("Asia/Manila").format('LLL'),
         }
-        this.setState({ //update items
+        this.setState({ 
             items :[...lastState,Object.assign({},toDo)]
         });
         TodoApi.onAddTodo(toDo).then(res=>{
-            //this.props.set(todo);
             console.log(res.data.response);
             if(res.data.success){
+                console.log(this.props.mode)
                 this.props.setStateItem([...lastState,Object.assign({},res.data.response)]);
                 this.props.setOriginalItems();
+                if(this.props.mode==='completed'){
+                        this.props.handleSplice();                        
+                }
                 this.setState({isAdding:false});
-                // alert("Todo added");
-                // this.setState({isLoadingItem:false});
                 return;
             }
-            //this.setState({isLoadingItem:false});
-            // toastr.error(res.data.response);
         }).catch(err=>{
-            // toastr.error('Ooops! Try again');
             console.log(err);
         }); 
     }
