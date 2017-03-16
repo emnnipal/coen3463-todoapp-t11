@@ -7,16 +7,28 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 50px;
-  padding: 20px;
-  color: white;
+  /*background-color: #222;*/*/
+  height: 80px;
+  padding: 3%;
+  color: #008BFF;
 }
+
 
 .App-intro {
   font-size: large;
   padding-left: 50px;
 }
+
+.userlogin{
+  padding-left: 15% !important;
+  padding-right: 15% !important;
+}
+
+.todoitems{
+  padding-bottom: 10% !important;
+
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

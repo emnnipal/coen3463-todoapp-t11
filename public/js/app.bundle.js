@@ -15279,8 +15279,8 @@ var styles = {
 	}
 };
 
-var loadingimage = React.createClass({
-	displayName: 'loadingimage',
+var normal = React.createClass({
+	displayName: 'normal',
 
 	propTypes: {
 		text: PropTypes.string,
@@ -15353,7 +15353,7 @@ var loadingimage = React.createClass({
 
 });
 
-module.exports = loadingimage;
+module.exports = normal;
 
 /***/ }),
 /* 153 */
@@ -21573,8 +21573,6 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(100);
-
 var _semanticUiReact = __webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21584,6 +21582,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import './App.css';
+
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -21600,6 +21600,16 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 _semanticUiReact.Container,
                 { fluid: true },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'App-header' },
+                    _react2.default.createElement(
+                        'h3',
+                        { style: { textAlign: 'center' } },
+                        'To Do App!'
+                    )
+                ),
+                _react2.default.createElement('br', null),
                 this.props.children
             );
         }
@@ -47173,6 +47183,10 @@ var _loading = __webpack_require__(152);
 
 var _loading2 = _interopRequireDefault(_loading);
 
+var _normal = __webpack_require__(1028);
+
+var _normal2 = _interopRequireDefault(_normal);
+
 var _TodoApi = __webpack_require__(252);
 
 var _TodoApi2 = _interopRequireDefault(_TodoApi);
@@ -47215,7 +47229,7 @@ var Todo = function (_React$Component) {
             e.preventDefault();
             var lastState = this.props.items;
             var toDo = {
-                name: this.refs.todo.value,
+                name: e.target.elements[0].value,
                 user: this.props.user,
                 createDate: moment().tz("Asia/Manila").format('LLL')
             };
@@ -47246,28 +47260,28 @@ var Todo = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'App-section' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'App-header' },
-                    _react2.default.createElement(
-                        'p',
-                        { style: { textAlign: 'center' } },
-                        'To Do App!'
-                    )
-                ),
-                this.props.isLoading ? _react2.default.createElement(_loading2.default, { text: 'Please Wait', speed: 300 }) : _react2.default.createElement(
+                this.props.isLoading ? _react2.default.createElement(
                     _semanticUiReact.Container,
-                    null,
+                    { text: true },
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(_loading2.default, { text: 'Please Wait', speed: 300 })
+                ) : _react2.default.createElement(
+                    _semanticUiReact.Container,
+                    { text: true },
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        this.props.name,
-                        ' | ',
-                        this.props.email
+                        _semanticUiReact.Header,
+                        { as: 'h4', dividing: true },
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            this.props.name,
+                            ' | ',
+                            this.props.email
+                        )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'App-section' },
+                        { className: 'todoitems' },
                         _react2.default.createElement(
                             _semanticUiReact.Menu,
                             { pointing: true, secondary: true },
@@ -47283,17 +47297,26 @@ var Todo = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             _semanticUiReact.Form,
-                            null,
+                            { onSubmit: this.onAddTodo },
                             _react2.default.createElement(
                                 _semanticUiReact.Form.Field,
                                 null,
-                                _react2.default.createElement(
+                                this.state.isAdding ? _react2.default.createElement(
                                     _semanticUiReact.Input,
-                                    { size: 'medium' },
-                                    _react2.default.createElement('input', { placeholder: 'Add a To Do item.', ref: 'todo' }),
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Input, { loading: true, icon: 'user', size: 'medium', placeholder: 'Add a To Do item.' }),
                                     _react2.default.createElement(
-                                        'button',
-                                        { onClick: this.onAddTodo },
+                                        _semanticUiReact.Button,
+                                        { primary: true, type: 'submit' },
+                                        _react2.default.createElement(_normal2.default, { text: '', speed: 300 })
+                                    )
+                                ) : _react2.default.createElement(
+                                    _semanticUiReact.Input,
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Input, { size: 'medium', placeholder: 'Add a To Do item.' }),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Button,
+                                        { primary: true, type: 'submit' },
                                         '+'
                                     )
                                 )
@@ -47424,26 +47447,30 @@ var User = function (_Component) {
                 { text: true },
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    _semanticUiReact.Menu,
-                    { attached: 'top', tabular: true },
-                    _react2.default.createElement(_semanticUiReact.Menu.Item, { name: 'login', active: this.props.mode === 'login', onClick: this.props.handleLogin }),
-                    _react2.default.createElement(_semanticUiReact.Menu.Item, { name: 'register', active: this.props.mode === 'register', onClick: this.props.handleRegister })
-                ),
-                this.props.mode === 'login' ? _react2.default.createElement(
-                    _semanticUiReact.Segment,
-                    { attached: 'bottom' },
+                    'div',
+                    { className: 'userlogin' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'App-section' },
-                        _react2.default.createElement(_Login2.default, null)
-                    )
-                ) : _react2.default.createElement(
-                    _semanticUiReact.Segment,
-                    { attached: 'bottom' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'App-section' },
-                        _react2.default.createElement(_Register2.default, null)
+                        _semanticUiReact.Menu,
+                        { attached: 'top', tabular: true },
+                        _react2.default.createElement(_semanticUiReact.Menu.Item, { name: 'login', active: this.props.mode === 'login', onClick: this.props.handleLogin }),
+                        _react2.default.createElement(_semanticUiReact.Menu.Item, { name: 'register', active: this.props.mode === 'register', onClick: this.props.handleRegister })
+                    ),
+                    this.props.mode === 'login' ? _react2.default.createElement(
+                        _semanticUiReact.Segment,
+                        { attached: 'bottom' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'App-section' },
+                            _react2.default.createElement(_Login2.default, null)
+                        )
+                    ) : _react2.default.createElement(
+                        _semanticUiReact.Segment,
+                        { attached: 'bottom' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'App-section' },
+                            _react2.default.createElement(_Register2.default, null)
+                        )
                     )
                 )
             );
@@ -83196,7 +83223,7 @@ exports = module.exports = __webpack_require__(646)();
 
 
 // module
-exports.push([module.i, ".App {\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  background-color: #222;\r\n  height: 50px;\r\n  padding: 20px;\r\n  color: white;\r\n}\r\n\r\n.App-intro {\r\n  font-size: large;\r\n  padding-left: 50px;\r\n}\r\n\r\n@keyframes App-logo-spin {\r\n  from { transform: rotate(0deg); }\r\n  to { transform: rotate(360deg); }\r\n}\r\n", ""]);
+exports.push([module.i, ".App {\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  /*background-color: #222;*/*/\r\n  height: 80px;\r\n  padding: 3%;\r\n  color: #008BFF;\r\n}\r\n\r\n\r\n.App-intro {\r\n  font-size: large;\r\n  padding-left: 50px;\r\n}\r\n\r\n.userlogin{\r\n  padding-left: 15% !important;\r\n  padding-right: 15% !important;\r\n}\r\n\r\n.todoitems{\r\n  padding-bottom: 10% !important;\r\n\r\n}\r\n\r\n\r\n@keyframes App-logo-spin {\r\n  from { transform: rotate(0deg); }\r\n  to { transform: rotate(360deg); }\r\n}\r\n", ""]);
 
 // exports
 
@@ -84320,6 +84347,102 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _reactDom.render)(_routes2.default, document.getElementById('app'));
+
+/***/ }),
+/* 1028 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _semanticUiReact = __webpack_require__(63);
+
+var React = __webpack_require__(2);
+var PropTypes = React.PropTypes;
+
+
+var styles = {
+	container: {
+		position: 'fixed',
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		fontsize: '55px'
+	},
+	content: {
+		textAlign: 'center',
+		position: 'absolute',
+		width: '100px',
+		marginTop: '30px'
+	}
+};
+
+var loadingimage = React.createClass({
+	displayName: 'loadingimage',
+
+	propTypes: {
+		text: PropTypes.string,
+		speed: PropTypes.number
+	},
+	getDefaultProps: function getDefaultProps() {
+		return {
+			text: 'Loading',
+			speed: 300
+		};
+	},
+	getInitialState: function getInitialState() {
+		this.originalText = this.props.text;
+		return {
+			text: this.originalText
+		};
+	},
+	componentDidMount: function componentDidMount() {
+		var stopper = this.originalText + '...';
+		this.interval = setInterval(function () {
+			if (this.state.text === stopper) {
+				this.setState({
+					text: this.originalText
+				});
+			} else {
+				this.setState({
+					text: this.state.text + '.'
+				});
+			}
+		}.bind(this), this.props.speed);
+	},
+	componentWillUnmount: function componentWillUnmount() {
+		clearInterval(this.interval);
+	},
+	// render: function() {
+	// 	return (
+	// 		<div>
+	// 			<Segment>
+	// 		      <Dimmer active inverted>
+	// 		        <Loader inverted>{this.state.text}</Loader>
+	// 		      </Dimmer>
+	// 		      <br/>
+	// 		      <br/>
+	// 		      <br/>
+	// 		      <br/>
+	// 		      <br/>
+	// 		      <br/>
+	// 		      <br/>
+	// 		    </Segment>
+	// 		</div>	
+	// 	);
+	// }
+	render: function render() {
+		return React.createElement(
+			'p',
+			null,
+			this.state.text
+		);
+	}
+
+});
+
+module.exports = loadingimage;
 
 /***/ })
 /******/ ]);

@@ -2,9 +2,9 @@ import React, {PropTypes} from 'react';
 import '../components/App.css';
 import ToDos from '../components/ToDos.js';
 import Loading from './loading';
+import Normal from './normal';
 import TodoApi from '../api/TodoApi';
-import { Container } from 'semantic-ui-react'
-import { Segment, Menu, Input, Form, List } from 'semantic-ui-react'
+import { Segment, Menu, Input, Form, List, Button,Grid, Container, Header } from 'semantic-ui-react'
 var moment = require('moment-timezone');
 
 class Todo extends React.Component{
@@ -20,7 +20,7 @@ class Todo extends React.Component{
         e.preventDefault();
         var lastState = this.props.items; 
         let toDo = { 
-            name: this.refs.todo.value,
+            name: e.target.elements[0].value,
             user: this.props.user,
             createDate: moment().tz("Asia/Manila").format('LLL'),
         }
@@ -47,16 +47,16 @@ class Todo extends React.Component{
     render(){
     return(
         <div className="App-section">
-                <div className="App-header">
-                    <p style={{textAlign:'center'}}>To Do App!</p>
-                    
-                </div>
+                
                 {this.props.isLoading? 
-                <Loading text="Please Wait" speed={300}/>
+                <Container text><br/><Loading text="Please Wait" speed={300}/></Container>
                 :
-                <Container>
-                <p>{this.props.name} | {this.props.email}</p>
-                <div className="App-section">
+
+                <Container text>
+                <Header as='h4' dividing>
+                    <p>{this.props.name} | {this.props.email}</p>
+                </Header>
+                <div className="todoitems">
                 <Menu pointing secondary>
                   <Menu.Item name='all' active={this.props.mode === 'all'} onClick={this.props.todoAll} />
                   <Menu.Item style={{color: 'blue'}} name='open' active={this.props.mode === 'open'} onClick={this.props.todoOpen} />
@@ -66,13 +66,21 @@ class Todo extends React.Component{
                     <Menu.Item name='logout' onClick={this.props.onLogOut} />
                   </Menu.Menu>
                 </Menu>
-                <Form>
+                <Form onSubmit={this.onAddTodo}>
                 <Form.Field>
-                    <Input size="medium">
-                        <input placeholder="Add a To Do item." ref="todo"/>
-                        <button onClick={this.onAddTodo}>+</button>
+                    {this.state.isAdding?
+                    <Input>
+                    <Input loading icon="user" size="medium" placeholder="Add a To Do item."/>
+                    <Button primary type='submit'><Normal text="" speed={300}/></Button> 
                     </Input>
+                    :
+                    <Input>
+                    <Input size="medium" placeholder="Add a To Do item."/>
+                    <Button primary type='submit'>+</Button>
+                    </Input>
+                    }
                 </Form.Field>
+
                 </Form>
                 <Segment>
                     <div className="App-section">

@@ -1,6 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-import { Dimmer, Loader, Image, Segment, Message, Icon, Container } from 'semantic-ui-react'
+import { Dimmer, Loader, Image, Segment, Message, Icon } from 'semantic-ui-react'
 
 var styles = {
 	container:{
@@ -19,7 +19,7 @@ var styles = {
 	}
 };
 
-var normal = React.createClass({
+var loadingimage = React.createClass({
 	propTypes: {
 		text: PropTypes.string,
 		speed:PropTypes.number
@@ -73,17 +73,11 @@ var normal = React.createClass({
 	// }
 	render: function() {
 		return (
-			<Message icon>
-			    <Icon name='circle notched' loading />
-			    <Message.Content>
-			      <Message.Header>{this.state.text}</Message.Header>
-			      We are fetching that content for you.
-			    </Message.Content>
-			 </Message>
+			<p>{this.state.text}</p>
 		);
 	}
 
 });
 
-module.exports = normal;
+module.exports = loadingimage;
 

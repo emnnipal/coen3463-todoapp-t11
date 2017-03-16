@@ -2,7 +2,7 @@ import React, {Component,PropTypes} from 'react';
 import '../components/App.css';
 import Login from '../components/Login.js';
 import Register from '../components/Register.js';
-import { Segment, Button, Divider, Container, Menu, Input } from 'semantic-ui-react'
+import { Segment, Button, Divider, Menu, Input, Grid, Container} from 'semantic-ui-react'
 
 
 class User extends Component {
@@ -23,10 +23,10 @@ class User extends Component {
     return(
         <Container text>
         <br/>
+        <div className='userlogin'>
             <Menu attached='top' tabular>
           <Menu.Item name='login' active={this.props.mode === 'login'} onClick={this.props.handleLogin}  />
           <Menu.Item name='register' active={this.props.mode === 'register'} onClick={this.props.handleRegister} />
-          
         </Menu>
         {this.props.mode === 'login'?
         <Segment attached='bottom'>
@@ -40,9 +40,8 @@ class User extends Component {
                     <Register />
                 </div>
         </Segment>
-        }     
-            
-            
+        }
+        </div>
         </Container>
     );
 }
