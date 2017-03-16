@@ -15,7 +15,9 @@ var User = new Schema({
         message: 'Username must be alpha characters only.'
         }, 
 	},
-    first_name: String,
+    first_name: {type:String,
+                required: [true,'First Name is required.'],
+    },
     last_name: String,
     email: {
         type: String,

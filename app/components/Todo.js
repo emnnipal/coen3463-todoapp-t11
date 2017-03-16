@@ -51,7 +51,6 @@ class Todo extends React.Component{
                 {this.props.isLoading? 
                 <Container text><br/><Loading text="Please Wait" speed={300}/></Container>
                 :
-
                 <Container text>
                 <Header as='h4' dividing>
                     <p>{this.props.name} | {this.props.email}</p>

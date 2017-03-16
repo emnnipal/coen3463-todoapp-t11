@@ -46939,6 +46939,8 @@ var _AuthApi = __webpack_require__(101);
 
 var _AuthApi2 = _interopRequireDefault(_AuthApi);
 
+__webpack_require__(100);
+
 var _semanticUiReact = __webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -47065,7 +47067,24 @@ var Register = function (_Component) {
           _react2.default.createElement(
             'label',
             null,
-            'Username'
+            'Fields with ',
+            _react2.default.createElement(
+              'bold',
+              { style: { color: 'red' } },
+              '*'
+            ),
+            ' are required.'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Username ',
+            _react2.default.createElement(
+              'bold',
+              { style: { color: 'red' } },
+              '*'
+            )
           ),
           _react2.default.createElement(
             _semanticUiReact.Input,
@@ -47084,7 +47103,12 @@ var Register = function (_Component) {
           _react2.default.createElement(
             'label',
             null,
-            'Password'
+            'Password ',
+            _react2.default.createElement(
+              'bold',
+              { style: { color: 'red' } },
+              '*'
+            )
           ),
           _react2.default.createElement(
             _semanticUiReact.Input,
@@ -47098,7 +47122,12 @@ var Register = function (_Component) {
           _react2.default.createElement(
             'label',
             null,
-            'First Name'
+            'First Name ',
+            _react2.default.createElement(
+              'bold',
+              { style: { color: 'red' } },
+              '*'
+            )
           ),
           _react2.default.createElement(
             _semanticUiReact.Input,
@@ -47126,7 +47155,12 @@ var Register = function (_Component) {
           _react2.default.createElement(
             'label',
             null,
-            'Email'
+            'Email ',
+            _react2.default.createElement(
+              'bold',
+              { style: { color: 'red' } },
+              '*'
+            )
           ),
           _react2.default.createElement(
             _semanticUiReact.Input,
@@ -83223,7 +83257,7 @@ exports = module.exports = __webpack_require__(646)();
 
 
 // module
-exports.push([module.i, ".App {\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  /*background-color: #222;*/*/\r\n  height: 80px;\r\n  padding: 3%;\r\n  color: #008BFF;\r\n}\r\n\r\n\r\n.App-intro {\r\n  font-size: large;\r\n  padding-left: 50px;\r\n}\r\n\r\n.userlogin{\r\n  padding-left: 15% !important;\r\n  padding-right: 15% !important;\r\n}\r\n\r\n.todoitems{\r\n  padding-bottom: 10% !important;\r\n\r\n}\r\n\r\n\r\n@keyframes App-logo-spin {\r\n  from { transform: rotate(0deg); }\r\n  to { transform: rotate(360deg); }\r\n}\r\n", ""]);
+exports.push([module.i, ".App {\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  /*background-color: #222;*/*/\r\n  height: 80px;\r\n  padding: 3%;\r\n  color: #008BFF;\r\n}\r\n\r\n\r\n.App-intro {\r\n  font-size: large;\r\n  padding-left: 50px;\r\n}\r\n\r\n.userlogin{\r\n  padding-left: 15% !important;\r\n  padding-right: 15% !important;\r\n  padding-bottom: 5% !important;\r\n}\r\n\r\n.todoitems{\r\n  padding-bottom: 10% !important;\r\n\r\n}\r\n\r\n.red{\r\n  color: red !important;\r\n}\r\n\r\n@keyframes App-logo-spin {\r\n  from { transform: rotate(0deg); }\r\n  to { transform: rotate(360deg); }\r\n}\r\n", ""]);
 
 // exports
 

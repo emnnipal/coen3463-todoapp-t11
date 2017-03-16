@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AuthApi from '../api/AuthApi';
+import './App.css';
 import { Button, Checkbox, Form, Input, Label, Message } from 'semantic-ui-react';
 
 class Register extends Component {
@@ -91,7 +92,9 @@ class Register extends Component {
           <p>{this.state.error}</p>
         </Message>:<p/>}
         <Form.Field>
-          <label>Username</label>
+          <label>Fields with <bold style={{color:'red'}}>*</bold> are required.</label>
+          <br/>
+          <label>Username <bold style={{color:'red'}}>*</bold></label>
           <Input>
           <input type="text" placeholder="" ref="username" onKeyPress={this.onUsername} required={true}/>
           </Input>
@@ -99,13 +102,13 @@ class Register extends Component {
           <p></p>}
         </Form.Field>
         <Form.Field>
-          <label>Password</label>
+          <label>Password <bold style={{color:'red'}}>*</bold></label>
           <Input>
           <input type="password" placeholder="" ref="password" required={true}/>
           </Input>
         </Form.Field>
         <Form.Field>
-          <label>First Name</label>
+          <label>First Name <bold style={{color:'red'}}>*</bold></label>
           <Input>
           <input type="text" placeholder="" ref="first_name" required={true}/>
           </Input>
@@ -117,7 +120,7 @@ class Register extends Component {
           </Input>
         </Form.Field>
         <Form.Field>
-          <label>Email</label>
+          <label>Email <bold style={{color:'red'}}>*</bold></label>
           <Input>
           <input type="text" placeholder="" ref="email" onKeyPress={this.onEmail} required={true}/>
           </Input>
