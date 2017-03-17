@@ -84,9 +84,9 @@ class Todo extends React.Component{
                 <Segment>
                     <div className="App-section">
                     {this.props.onUpdate? <Loading text="Just one second" speed={300}/>:
-                    <div>{(this.props.originalitems - this.props.completedCount)=== 1?
-                    <p>{this.props.originalitems - this.props.completedCount}/{this.props.originalitems} item left</p>:
-                    <p>{this.props.originalitems - this.props.completedCount}/{this.props.originalitems} items left</p>
+                    <div>{(this.props.completedCount)=== 1?
+                    <p>{this.props.completedCount}/{this.props.originalitems} item completed</p>:
+                    <p>{this.props.completedCount}/{this.props.originalitems} items completed</p>
                     } 
                         {this.props.onUpdate? <Loading text="Loading" speed={300}/>:
                         <div>
